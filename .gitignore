@@ -1,6 +1,9 @@
 .theos/
 packages/
 .DS_Store
-/Resources/Frameworks
-/Resources/*.dylib
-/lib
+*.xcscmblueprint
+*.xccheckout
+*.xcarchive
+xcuserdata
+Resources/Frameworks/OpenSSL.framework
+apps_nightly.json

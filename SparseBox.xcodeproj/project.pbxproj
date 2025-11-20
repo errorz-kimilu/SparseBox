@@ -27,6 +27,13 @@
 		E14762762DF13CB700FC89FB /* libminimuxer-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626D2DF13CB700FC89FB /* libminimuxer-ios.a */; };
 		E14762772DF13CB700FC89FB /* libplist-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626E2DF13CB700FC89FB /* libplist-2.0.a */; };
 		E14762782DF13CB700FC89FB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626F2DF13CB700FC89FB /* libssl.a */; };
+		E15588802ECF1AF300D0BF93 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E155887F2ECF1AF300D0BF93 /* NIO */; };
+		E15588822ECF1AF300D0BF93 /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = E15588812ECF1AF300D0BF93 /* NIOHTTP1 */; };
+		E15588882ECF25A000D0BF93 /* FlyingFox in Frameworks */ = {isa = PBXBuildFile; productRef = E15588872ECF25A000D0BF93 /* FlyingFox */; };
+		E155888F2ECF4D9800D0BF93 /* downloads.28.sqlitedb in Resources */ = {isa = PBXBuildFile; fileRef = E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */; };
+		E15588902ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */; };
+		E15588912ECF4D9800D0BF93 /* BLDatabaseManager.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */; };
+		E15588922ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +99,11 @@
 		E147626E2DF13CB700FC89FB /* libplist-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libplist-2.0.a"; sourceTree = "<group>"; };
 		E147626F2DF13CB700FC89FB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		E14762702DF13CB700FC89FB /* libusbmuxd-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libusbmuxd-2.0.a"; sourceTree = "<group>"; };
+		E15588832ECF1BA000D0BF93 /* SparseBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SparseBox-Info.plist"; sourceTree = "<group>"; };
+		E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BLDatabaseManager.sqlite; sourceTree = "<group>"; };
+		E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-shm"; sourceTree = "<group>"; };
+		E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-wal"; sourceTree = "<group>"; };
+		E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */ = {isa = PBXFileReference; lastKnownFileType = file; path = downloads.28.sqlitedb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -127,8 +139,11 @@
 				E14762722DF13CB700FC89FB /* libem_proxy-ios.a in Frameworks */,
 				E14762732DF13CB700FC89FB /* libimobiledevice-glue-1.0.a in Frameworks */,
 				E14762742DF13CB700FC89FB /* libimobiledevice-1.0.a in Frameworks */,
+				E15588822ECF1AF300D0BF93 /* NIOHTTP1 in Frameworks */,
 				E14762752DF13CB700FC89FB /* libusbmuxd-2.0.a in Frameworks */,
 				E14762762DF13CB700FC89FB /* libminimuxer-ios.a in Frameworks */,
+				E15588802ECF1AF300D0BF93 /* NIO in Frameworks */,
+				E15588882ECF25A000D0BF93 /* FlyingFox in Frameworks */,
 				E14762772DF13CB700FC89FB /* libplist-2.0.a in Frameworks */,
 				E14762782DF13CB700FC89FB /* libssl.a in Frameworks */,
 			);
@@ -140,6 +155,7 @@
 		E14761E42DF135F000FC89FB = {
 			isa = PBXGroup;
 			children = (
+				E15588832ECF1BA000D0BF93 /* SparseBox-Info.plist */,
 				E14761EF2DF135F000FC89FB /* Sources */,
 				E14761EE2DF135F000FC89FB /* Products */,
 				E147622A2DF1364F00FC89FB /* include */,
@@ -258,6 +274,10 @@
 			children = (
 				E14762322DF1368000FC89FB /* eligibility.plist */,
 				E14762332DF1368000FC89FB /* FeatureFlags_Global.plist */,
+				E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */,
+				E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */,
+				E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */,
+				E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -285,6 +305,9 @@
 				E14762622DF138AB00FC89FB /* NIOCore */,
 				E14762642DF138AB00FC89FB /* NIOFoundationCompat */,
 				E14762662DF138AB00FC89FB /* NIOPosix */,
+				E155887F2ECF1AF300D0BF93 /* NIO */,
+				E15588812ECF1AF300D0BF93 /* NIOHTTP1 */,
+				E15588872ECF25A000D0BF93 /* FlyingFox */,
 			);
 			productName = SparseBox;
 			productReference = E14761ED2DF135F000FC89FB /* SparseBox.app */;
@@ -317,6 +340,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E14762612DF138AB00FC89FB /* XCRemoteSwiftPackageReference "swift-nio" */,
+				E15588862ECF25A000D0BF93 /* XCRemoteSwiftPackageReference "FlyingFox" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E14761EE2DF135F000FC89FB /* Products */;
@@ -334,6 +358,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E14762372DF1368000FC89FB /* eligibility.plist in Resources */,
+				E155888F2ECF4D9800D0BF93 /* downloads.28.sqlitedb in Resources */,
+				E15588902ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal in Resources */,
+				E15588912ECF4D9800D0BF93 /* BLDatabaseManager.sqlite in Resources */,
+				E15588922ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm in Resources */,
 				E14762382DF1368000FC89FB /* FeatureFlags_Global.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,11 +520,13 @@
 				DEVELOPMENT_TEAM = Z325T66NZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SparseBox-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,11 +558,13 @@
 				DEVELOPMENT_TEAM = Z325T66NZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SparseBox-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -584,6 +616,14 @@
 				minimumVersion = 2.83.0;
 			};
 		};
+		E15588862ECF25A000D0BF93 /* XCRemoteSwiftPackageReference "FlyingFox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swhitty/FlyingFox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.26.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -601,6 +641,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E14762612DF138AB00FC89FB /* XCRemoteSwiftPackageReference "swift-nio" */;
 			productName = NIOPosix;
+		};
+		E155887F2ECF1AF300D0BF93 /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E14762612DF138AB00FC89FB /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		E15588812ECF1AF300D0BF93 /* NIOHTTP1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E14762612DF138AB00FC89FB /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOHTTP1;
+		};
+		E15588872ECF25A000D0BF93 /* FlyingFox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E15588862ECF25A000D0BF93 /* XCRemoteSwiftPackageReference "FlyingFox" */;
+			productName = FlyingFox;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

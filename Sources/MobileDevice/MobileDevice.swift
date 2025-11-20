@@ -225,6 +225,47 @@ class MobileDevice {
         return result
     }
     
+    static func requireAppleFileConduitService(
+        device: idevice_t,
+        appleFileConduitService: lockdownd_service_descriptor_t,
+        task: (afc_client_t?) -> Void
+    ) {
+        var client: afc_client_t?
+        guard afc_client_new(device, appleFileConduitService, &client) == AFC_E_SUCCESS,
+              let client
+        else {
+            task(nil)
+            return
+        }
+        task(client)
+        afc_client_free(client)
+    }
+    
+    static func requireAppleFileConduitService(udid: String, task: (afc_client_t?) -> Void) {
+        requireDevice(udid: udid) { device in
+            guard let device else {
+                print("ERROR: Failed to requireDevice()")
+                return
+            }
+            requireLockdownClient(device: device, handshake: true) { lkd_client in
+                guard let lkd_client else {
+                    print("ERROR: Failed to requireLockdownClient()")
+                    return
+                }
+                let serviceName = "com.apple.afc"
+                requireLockdownService(client: lkd_client, serviceName: serviceName, requiresEscrowBag: false) { lkd_service in
+                    guard let lkd_service else {
+                        print("ERROR: Failed to requireLockdownClient(\(serviceName)")
+                        return
+                    }
+                    requireAppleFileConduitService(device: device, appleFileConduitService: lkd_service) { client in
+                        task(client)
+                    }
+                }
+            }
+        }
+    }
+    
     /*
     func requireMobileBackup2Service(
         device: idevice_t,
@@ -240,22 +281,6 @@ class MobileDevice {
         }
         task(client)
         mobilebackup2_client_free(client)
-    }
-    
-    func requireAppleFileConduitService(
-        device: idevice_t,
-        appleFileConduitService: lockdownd_service_descriptor_t,
-        task: (afc_client_t?) -> Void
-    ) {
-        var client: afc_client_t?
-        guard afc_client_new(device, appleFileConduitService, &client) == AFC_E_SUCCESS,
-              let client
-        else {
-            task(nil)
-            return
-        }
-        task(client)
-        afc_client_free(client)
     }
     
     func postNotification(

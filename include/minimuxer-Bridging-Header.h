@@ -3,6 +3,7 @@
 #import "minimuxer.h"
 #include "libimobiledevice/libimobiledevice.h"
 #include "libimobiledevice/diagnostics_relay.h"
+#include "libimobiledevice/afc.h"
 #include "libimobiledevice/mobilebackup2.h"
 #include "libimobiledevice/debugserver.h"
 #include "libimobiledevice/heartbeat.h"

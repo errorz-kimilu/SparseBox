@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 enum PathTraversalCapability: Int {
     case unsupported = 0 // 18.2b3+, 17.7.2
@@ -28,10 +29,23 @@ class FileToRestore {
 
 struct Restore {
     static func supportedExploitLevel() -> PathTraversalCapability {
-        if #available(iOS 18.1, *) {
-            return .dotOnly
+        let current = Utils.buildToUInt64(UIDevice.current.buildVersion)
+        if #available(iOS 18, *) {
+            if current >= Utils.buildToUInt64("22C5131e") { // >= 18.2b3
+                return .unsupported
+            } else if current >= Utils.buildToUInt64("22B5054e") { // >= 18.1b5
+                return .dotOnly
+            } else {
+                return .dotAndSlashes
+            }
         } else {
-            return .dotAndSlashes
+            if current >= Utils.buildToUInt64("21H221") {
+                return .unsupported
+            } else if current >= Utils.buildToUInt64("21H216") {
+                return .dotOnly
+            } else {
+                return .dotAndSlashes
+            }
         }
     }
     
@@ -87,15 +101,6 @@ struct Restore {
         
         return Backup(files: [
             // MobileGestalt
-            Directory(path: "", domain: "SysSharedContainerDomain-systemgroup.com.apple.mobilegestaltcache"),
-            Directory(path: "systemgroup.com.apple.mobilegestaltcache/Library", domain: "SysSharedContainerDomain-"),
-            Directory(path: "systemgroup.com.apple.mobilegestaltcache/Library/Caches", domain: "SysSharedContainerDomain-"),
-            ConcreteFile(
-                path: "systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist",
-                domain: "SysSharedContainerDomain-",
-                contents: file.contents,
-                owner: file.owner,
-                group: file.group),
             //ConcreteFile(path: "", domain: "SysContainerDomain-../../../../../../../../crash_on_purpose", contents: Data())
             // Skip setup
             Directory(path: "", domain: "SysSharedContainerDomain-systemgroup.com.apple.configurationprofiles"),

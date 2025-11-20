@@ -8,8 +8,8 @@ extension UIDocumentPickerViewController {
 }
 
 struct ContentView: View {
-    let os = ProcessInfo().operatingSystemVersion
     let origMGURL, modMGURL, featFlagsURL: URL
+    @Environment(\.scenePhase) var scenePhase
     @AppStorage("PairingFile") var pairingFile: String?
     @State var mbdb: Backup?
     @State var eligibilityData = Data()
@@ -27,6 +27,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             Form {
+                Section {
+                    Text("HTTP server port \(Utils.port)")
+                } header: {
+                    Text("Debug")
+                }
                 Section {
                     Button(pairingFile == nil ? "Select pairing file" : "Reset pairing file") {
                         if pairingFile == nil {
@@ -67,27 +72,27 @@ struct ContentView: View {
                 }
                 Section {
                     Toggle("Action Button", isOn: bindingForMGKeys(["cT44WE1EohiwRzhsZ8xEsw"]))
-                        .disabled(requiresVersion(17))
+                        .disabled(Utils.requiresVersion(17))
                     Toggle("Allow installing iPadOS apps", isOn: bindingForMGKeys(["9MZ5AdH43csAUajl/dU+IQ"], type: [Int].self, defaultValue: [1], enableValue: [1, 2]))
                     Toggle("Always on Display (18.0+)", isOn: bindingForMGKeys(["j8/Omm6s1lsmTDFsXjsBfA", "2OOJf1VhaM7NxfRok3HbWQ"]))
-                        .disabled(requiresVersion(18))
+                        .disabled(Utils.requiresVersion(18))
                     Toggle("Apple Intelligence", isOn: bindingForAppleIntelligence())
-                        .disabled(requiresVersion(18))
+                        .disabled(Utils.requiresVersion(18))
                     Toggle("Apple Pencil", isOn: bindingForMGKeys(["yhHcB0iH0d1XzPO/CFd3ow"]))
                     Toggle("Boot chime", isOn: bindingForMGKeys(["QHxt+hGLaBPbQJbXiUJX3w"]))
                     Toggle("Camera button (18.0rc+)", isOn: bindingForMGKeys(["CwvKxM2cEogD3p+HYgaW0Q", "oOV1jhJbdV3AddkcCg0AEA"]))
-                        .disabled(requiresVersion(18))
+                        .disabled(Utils.requiresVersion(18))
                     Toggle("Charge limit", isOn: bindingForMGKeys(["37NVydb//GP/GrhuTN+exg"]))
-                        .disabled(requiresVersion(17))
+                        .disabled(Utils.requiresVersion(17))
                     Toggle("Crash Detection (might not work)", isOn: bindingForMGKeys(["HCzWusHQwZDea6nNhaKndw"]))
                     Toggle("Dynamic Island (17.4+, might not work)", isOn: bindingForMGKeys(["YlEtTtHlNesRBMal1CqRaA"]))
-                        .disabled(requiresVersion(17, 4))
+                        .disabled(Utils.requiresVersion(17, 4))
                     Toggle("Disable region restrictions", isOn: bindingForRegionRestriction())
                     Toggle("Internal Storage info", isOn: bindingForMGKeys(["LBJfwOEzExRxzlAnSuI7eg"]))
                     Toggle("Metal HUD for all apps", isOn: bindingForMGKeys(["EqrsVvjcYDdxHBiQmGhAWw"]))
                     Toggle("Stage Manager", isOn: bindingForMGKeys(["qeaj75wk3HF4DwQ8qbIi7g"]))
                         .disabled(UIDevice.current.userInterfaceIdiom != .pad)
-                    if let isSE = UIDevice.perform(Selector("_hasHomeButton")) {
+                    if UIDevice._hasHomeButton() {
                         Toggle("Tap to Wake (iPhone SE)", isOn: bindingForMGKeys(["yZf3GTRMGTuwSV/lD7Cagw"]))
                     }
                 } header: {
@@ -103,7 +108,7 @@ struct ContentView: View {
                             Text("iPhone 16 Pro Max").tag("iPhone17,2")
                         }
                     }
-                    //.disabled(requiresVersion(18, 1))
+                    //.disabled(Utils.requiresVersion(18, 1))
                 } header: {
                     Text("Device spoofing")
                 } footer: {
@@ -132,6 +137,20 @@ struct ContentView: View {
                         applyChanges()
                     }
                     .disabled(taskRunning)
+                }
+                Section {
+                    //ShareLink("Export Modified MobileGestalt", item: modMGURL)
+                    Button("Export Modified MobileGestalt", systemImage: "square.and.arrow.up") {
+                        saveProductType()
+                        try! mobileGestalt.write(to: modMGURL)
+                        let activityVC = UIActivityViewController(activityItems: [modMGURL], applicationActivities: nil)
+                        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            scene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+                        }
+                    }
+                    ShareLink("Export Original MobileGestalt", item: origMGURL)
+                }
+                Section {
                 } footer: {
                     VStack {
                         Text("""
@@ -163,9 +182,20 @@ Thanks to:
             }
             .navigationDestination(for: String.self) { view in
                 if view == "ApplyChanges" {
-                    LogView(mbdb: mbdb!, reboot: reboot)
-                } else if view == "ApplyNoReboot" {
-                    LogView(mbdb: mbdb!, reboot: false)
+                    LogView()
+                        .onAppear {
+                            DispatchQueue.global(qos: .background).async {
+                                performApplyMobileGestalt()
+                            }
+                        }
+                } else if view == "Apply3AppLimitBypass" {
+                    LogView()
+                        .onAppear {
+                            DispatchQueue.global(qos: .background).async {
+                                reboot = false
+                                performApply3AppLimitBypass()
+                            }
+                        }
                 } else if view == "ListApps" {
                     AppListView()
                 }
@@ -188,6 +218,25 @@ Thanks to:
             
             if let cacheExtra = mobileGestalt["CacheExtra"] as? NSMutableDictionary {
                 productType = cacheExtra["h9jDsbgj7xIVeIQ8S3/X3Q"] as! String
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            // keep HTTP server alive in the background for a while
+            if scenePhase == .inactive {
+                Utils.bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+                    // This executes when time is about to run out
+                    UIApplication.shared.endBackgroundTask(Utils.bgTask)
+                    Utils.bgTask = .invalid
+                })
+                if Utils.bgTask == .invalid {
+                    print("Failed to start background task")
+                    return
+                }
+            } else if scenePhase == .active {
+                if Utils.bgTask != .invalid {
+                    UIApplication.shared.endBackgroundTask(Utils.bgTask)
+                    Utils.bgTask = .invalid
+                }
             }
         }
     }
@@ -224,11 +273,16 @@ Thanks to:
     }
 
     func testBypassAppLimit() {
+        guard Restore.supportedExploitLevel() == .dotAndSlashes else {
+            lastError = "Unsupported iOS version. Must be running iOS 18.1b4 or older."
+            showErrorAlert.toggle()
+            return
+        }
         Task {
             taskRunning = true
             if ready() {
                 mbdb = Restore.createBypassAppLimit()
-                path.append("ApplyNoReboot")
+                path.append("Apply3AppLimitBypass")
             } else {
                 lastError = "minimuxer is not ready. Ensure you have WiFi and WireGuard VPN set up."
                 showErrorAlert.toggle()
@@ -250,7 +304,7 @@ Thanks to:
         Task {
             taskRunning = true
             if ready() {
-                mbdb = Restore.createMobileGestalt(file: FileToRestore(from: modMGURL, to: URL(filePath: "/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist"), owner: 501, group: 501))
+                //mbdb = Restore.createMobileGestalt(file: FileToRestore(from: modMGURL, to: URL(filePath: "/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist"), owner: 501, group: 501))
                 //Restore.createBackupFiles(files: generateFilesToRestore())
                 path.append("ApplyChanges")
             } else {
@@ -411,10 +465,77 @@ Thanks to:
         }
     }
     
-    func requiresVersion(_ major : Int, _ minor: Int = 0, _ patch: Int = 0) -> Bool {
-        // XXYYZZ: major XX, minor YY, patch ZZ
-        let requiredVersion = major*10000 + minor*100 + patch
-        let currentVersion = os.majorVersion*10000 + os.minorVersion*100 + os.patchVersion
-        return currentVersion < requiredVersion
+    func performApplyMobileGestalt() {
+        let deviceList = MobileDevice.deviceList()
+        guard deviceList.count == 1 else {
+            print("Invalid device count: \(deviceList.count)")
+            return
+        }
+        Utils.udid = deviceList.first!
+        D28BookChain.replaceMobileGestalt(udid: Utils.udid, path: "/aaaaa")
+        
+        /*
+        MobileDevice.requireAppleFileConduitService(udid: Utils.udid) { client in
+            var file: UInt64 = 0
+            let ret = afc_file_open(client, "/Downloads/downloads.28.sqlitedb", AFC_FOPEN_RW, &file)
+            guard ret == AFC_E_SUCCESS else {
+                print("AFC open failed with code \(ret)")
+                return
+            }
+            
+            let d28LocalPath = Bundle.main.url(forResource: "downloads", withExtension: "28.sqlitedb")!
+            let d28Data = try! Data(contentsOf: d28LocalPath)
+            d28Data.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+                let writeRet = afc_file_write(client, file, ptr.baseAddress!, UInt32(d28Data.count), <#UnsafeMutablePointer<UInt32>?#>)
+                guard writeRet == AFC_E_SUCCESS else {
+                    print("AFC write failed with code \(writeRet)")
+                    return
+                }
+            }
+        }
+         */
+    }
+    
+    func performApply3AppLimitBypass() {
+        let deviceList = MobileDevice.deviceList()
+        guard deviceList.count == 1 else {
+            print("Invalid device count: \(deviceList.count)")
+            return
+        }
+        Utils.udid = deviceList.first!
+        
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let folder = documentsDirectory.appendingPathComponent(Utils.udid, conformingTo: .data)
+        try? FileManager.default.removeItem(at: folder)
+        do {
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: false)
+            try mbdb!.writeTo(directory: folder)
+            // Restore now
+            let restoreArgs = [
+                "idevicebackup2",
+                "-n", "restore", "--no-reboot", "--system",
+                documentsDirectory.path(percentEncoded: false)
+            ]
+            print("Executing args: \(restoreArgs)")
+            var argv = restoreArgs.map{ strdup($0) }
+            let result = idevicebackup2_main(Int32(restoreArgs.count), &argv)
+            print("idevicebackup2 exited with code \(result)")
+            
+            print()
+            let log = GLOBAL_LOG.text
+            if log.contains("Domain name cannot contain a slash") {
+                print("Result: this iOS version is not supported.")
+            } else if log.contains("crash_on_purpose") || result == 0 {
+                print("Result: restore successful.")
+                if reboot {
+                    MobileDevice.rebootDevice(udid: Utils.udid)
+                }
+            }
+            
+            logPipe.fileHandleForReading.readabilityHandler = nil
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
     }
 }

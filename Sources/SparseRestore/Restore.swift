@@ -50,6 +50,8 @@ struct Restore {
     }
     
     static func createBypassAppLimit() -> Backup {
+        print("TODO")
+        /*
         let deviceList = MobileDevice.deviceList()
         guard deviceList.count == 1 else {
             print("Invalid device count: \(deviceList.count)")
@@ -81,6 +83,8 @@ struct Restore {
         
         files.append(ConcreteFile(path: "", domain: "SysContainerDomain-../../../../../../../../crash_on_purpose", contents: Data()))
         return Backup(files: files)
+         */
+        return Backup(files: [])
     }
     
     static func createMobileGestalt(file: FileToRestore) -> Backup {

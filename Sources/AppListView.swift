@@ -1,16 +1,24 @@
 import SwiftUI
 
 struct AppItemView: View {
-    let appDetails: [String : AnyCodable]
+    let appDetails: [String : Any]
+    let bundleID: String
     var body: some View {
         Form {
-            Section {
-                ForEach(Array(appDetails.keys), id: \.self) { k in
-                    let v = appDetails[k]?.value as? String
-                    Text(k)
-                        .badge("\(v ?? "(null)" )")
-                        .textSelection(.enabled)
+            NavigationLink {
+                List {
+                    ForEach(Array(appDetails.keys), id: \.self) { k in
+                        let v = appDetails[k] as? String
+                        VStack(alignment: .leading) {
+                            Text(k)
+                            Text(v ?? "(not a String)")
+                                .font(Font.footnote)
+                                .textSelection(.enabled)
+                        }
+                    }
                 }
+            } label: {
+                Text("View app details")
             }
             Section {
                 if let bundlePath = appDetails["Path"] {
@@ -26,58 +34,97 @@ struct AppItemView: View {
             } header: {
                 Text("Arbitrary read exploit")
             } footer: {
-                Text("After copying path, open Settings, paste it in search bar, select all again and tap Share.\n\nOnly supported on iOS 18.2b1 and older. For this exploit, folders can only be shared via AirDrop.\nIf you're sharing App Store apps, please note that it will still remain encrypted.")
+                Text("After copying path, open Settings, paste it in search bar, select all again and tap Share.\n\nOnly supported on iOS ≤ 18.2b1 and iOS 26.x. For this exploit, folders can only be shared via AirDrop.\nIf you're sharing App Store apps, please note that it will still remain encrypted.")
             }
         }
+        .navigationTitle((appDetails["CFBundleName"] as? String) ?? bundleID)
+    }
+
+    init(bundleID: String) {
+        self.bundleID = bundleID
+        self.appDetails = ["Loading": AnyCodable("...")]
+    }
+
+    init(appDetails: [String: Any]) {
+        self.appDetails = appDetails
+        self.bundleID = (appDetails["CFBundleIdentifier"] as? String) ?? ""
     }
 }
 
 struct AppListView: View {
-    @State var apps: [String : AnyCodable] = [:]
+    @State var apps: [String : [String : Any]] = [:]
+    @State var appIcons: [String : UIImage] = [:]
     @State var searchString: String = ""
+
     var results: [String] {
-        Array(searchString.isEmpty ? apps.keys : apps.filter {
-            let appDetails = $0.value.value as? [String: AnyCodable]
-            let appName = (appDetails!["CFBundleName"]?.value as! String?)!
-            let appPath = (appDetails!["Path"]?.value as! String?)!
-            return appName.contains(searchString) || appPath.contains(searchString)
-        }.keys)
+        let filtered: [String]
+        if searchString.isEmpty {
+            filtered = Array(apps.keys)
+        } else {
+            filtered = apps.compactMap { key, appDetails in
+                let appName = appDetails["CFBundleName"] as? String
+                let appPath = appDetails["Path"] as? String
+                return (appName!.contains(searchString) ||
+                        appPath!.contains(searchString)) ? key : nil
+            }
+        }
+        return filtered.sorted { a, b in
+            let nameA = apps[a]!["CFBundleName"] as! String
+            let nameB = apps[b]!["CFBundleName"] as! String
+            return nameA < nameB
+        }
     }
+
     var body: some View {
         List {
             ForEach(results, id: \.self) { bundleID in
-                let value = apps[bundleID]
-                let appDetails = value?.value as? [String: AnyCodable]
-                let appImage = appDetails!["PlaceholderIcon"]?.value as! Data?
-                let appName = (appDetails!["CFBundleName"]?.value as! String?)!
-                let appPath = (appDetails!["Path"]?.value as! String?)!
+                let appDetails = apps[bundleID]
+                let appName = (appDetails?["CFBundleName"] as? String) ?? ""
+                let appBundleID = (appDetails?["CFBundleIdentifier"] as? String) ?? ""
                 NavigationLink {
-                    AppItemView(appDetails: appDetails!)
+                    if let details = appDetails {
+                        AppItemView(appDetails: details)
+                    } else {
+                        AppItemView(bundleID: bundleID)
+                    }
                 } label: {
-                    Image(uiImage: UIImage(data: appImage!)!)
+                    Image(uiImage: appIcons[bundleID] ?? UIImage(systemName: "app")!)
                         .resizable()
                         .frame(width: 40, height: 40)
+                        .task(id: bundleID) {
+                            guard appIcons[bundleID] == nil else { return }
+                            await MainActor.run {
+                                appIcons[bundleID] = UIImage(systemName: "app")
+                            }
+                            let icon = await Task.detached(priority: .background) {
+                                try? JITEnableContext.shared.getAppIcon(withBundleId: bundleID)
+                            }.value
+                            await MainActor.run {
+                                if let icon { appIcons[bundleID] = icon }
+                            }
+                        }
                     VStack(alignment: .leading) {
                         Text(appName)
-                        Text(appPath).font(Font.footnote)
+                        Text(appBundleID).font(Font.footnote)
                     }
                 }
             }
         }
         .onAppear {
-            if apps.count == 0 {
-                Task {
-                    let deviceList = MobileDevice.deviceList()
-                    guard deviceList.count == 1 else {
-                        print("Invalid device count: \(deviceList.count)")
-                        return
-                    }
-                    let udid = deviceList.first!
-                    apps = MobileDevice.listApplications(udid: udid)!
+            Task {
+                do {
+                    apps = try JITEnableContext.shared.getAllAppsInfo() as! [String : [String : Any]]
+                } catch {
+                    apps = ["Failed to get app list: \(error)": [:]]
                 }
             }
         }
         .searchable(text: $searchString)
         .navigationTitle("App list")
     }
+    
+    init() {
+        apps = ["Loading": [:]]
+    }
+
 }

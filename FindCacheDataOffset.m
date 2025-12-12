@@ -2,7 +2,7 @@
 @import Darwin;
 @import MachO;
 
-__attribute__((constructor)) void FindCacheDataOffset() {
+long FindCacheDataOffset(const char *mgKey) {
     /*
      * TL;DR: finding CacheData value offset is as follows:
      * - Get a pointer to the corresponding obfuscated key in libMobileGestalt
@@ -13,7 +13,6 @@ __attribute__((constructor)) void FindCacheDataOffset() {
 
     const struct mach_header_64 *header = NULL;
     const char *mgName = "/usr/lib/libMobileGestalt.dylib";
-    const char *mgKey = "mtrAoWJ3gsq+I90ZnQ0vQw";
     dlopen(mgName, RTLD_GLOBAL);
 
     for (int i = 0; i < _dyld_image_count(); i++) {
@@ -50,6 +49,6 @@ __attribute__((constructor)) void FindCacheDataOffset() {
     }
 
     // FIXME: is offset of offset consistent?
-    off_t offset = (off_t)((uint16_t *)constSection)[0x9a/2] << 3;
-    [NSUserDefaults.standardUserDefaults setInteger:offset forKey:@"MGCacheDataDeviceClassNumberOffset"];
+    return (int)((uint16_t *)constSection)[0x9a/2] << 3;
+    //[NSUserDefaults.standardUserDefaults setInteger:offset forKey:@"MGCacheDataDeviceClassNumberOffset"];
 }

@@ -7,81 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E147622B2DF1365000FC89FB /* SwiftBridgeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14762292DF1364F00FC89FB /* SwiftBridgeCore.swift */; };
-		E147622C2DF1365000FC89FB /* minimuxer-helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14762272DF1364F00FC89FB /* minimuxer-helpers.swift */; };
-		E147622D2DF1365000FC89FB /* minimuxer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14762252DF1364F00FC89FB /* minimuxer.swift */; };
-		E147622E2DF1365000FC89FB /* em_proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14762222DF1364F00FC89FB /* em_proxy.swift */; };
+		E10DE74D2EEC141D00EC75FA /* downloads.28.sqlitedb in Resources */ = {isa = PBXBuildFile; fileRef = E10DE74C2EEC141D00EC75FA /* downloads.28.sqlitedb */; };
+		E10DE74E2EEC141D00EC75FA /* BLDatabaseManager.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = E10DE74A2EEC141D00EC75FA /* BLDatabaseManager.sqlite-shm */; };
+		E10DE74F2EEC141D00EC75FA /* BLDatabaseManager.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = E10DE74B2EEC141D00EC75FA /* BLDatabaseManager.sqlite-wal */; };
+		E10DE7502EEC141D00EC75FA /* BLDatabaseManager.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7492EEC141D00EC75FA /* BLDatabaseManager.sqlite */; };
 		E14762312DF1365A00FC89FB /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147622F2DF1365A00FC89FB /* empty.swift */; };
 		E14762372DF1368000FC89FB /* eligibility.plist in Resources */ = {isa = PBXBuildFile; fileRef = E14762322DF1368000FC89FB /* eligibility.plist */; };
 		E14762382DF1368000FC89FB /* FeatureFlags_Global.plist in Resources */ = {isa = PBXBuildFile; fileRef = E14762332DF1368000FC89FB /* FeatureFlags_Global.plist */; };
 		E147623A2DF1368E00FC89FB /* FindCacheDataOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = E14762392DF1368E00FC89FB /* FindCacheDataOffset.m */; };
-		E147623D2DF1369700FC89FB /* idevicebackup2.c in Sources */ = {isa = PBXBuildFile; fileRef = E147623C2DF1369700FC89FB /* idevicebackup2.c */; };
 		E14762632DF138AB00FC89FB /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = E14762622DF138AB00FC89FB /* NIOCore */; };
 		E14762652DF138AB00FC89FB /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E14762642DF138AB00FC89FB /* NIOFoundationCompat */; };
 		E14762672DF138AB00FC89FB /* NIOPosix in Frameworks */ = {isa = PBXBuildFile; productRef = E14762662DF138AB00FC89FB /* NIOPosix */; };
-		E14762712DF13CB700FC89FB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14762692DF13CB700FC89FB /* libcrypto.a */; };
-		E14762722DF13CB700FC89FB /* libem_proxy-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626A2DF13CB700FC89FB /* libem_proxy-ios.a */; };
-		E14762732DF13CB700FC89FB /* libimobiledevice-glue-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626C2DF13CB700FC89FB /* libimobiledevice-glue-1.0.a */; };
-		E14762742DF13CB700FC89FB /* libimobiledevice-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626B2DF13CB700FC89FB /* libimobiledevice-1.0.a */; };
-		E14762752DF13CB700FC89FB /* libusbmuxd-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14762702DF13CB700FC89FB /* libusbmuxd-2.0.a */; };
-		E14762762DF13CB700FC89FB /* libminimuxer-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626D2DF13CB700FC89FB /* libminimuxer-ios.a */; };
-		E14762772DF13CB700FC89FB /* libplist-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626E2DF13CB700FC89FB /* libplist-2.0.a */; };
-		E14762782DF13CB700FC89FB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E147626F2DF13CB700FC89FB /* libssl.a */; };
 		E15588802ECF1AF300D0BF93 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E155887F2ECF1AF300D0BF93 /* NIO */; };
 		E15588822ECF1AF300D0BF93 /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = E15588812ECF1AF300D0BF93 /* NIOHTTP1 */; };
 		E15588882ECF25A000D0BF93 /* FlyingFox in Frameworks */ = {isa = PBXBuildFile; productRef = E15588872ECF25A000D0BF93 /* FlyingFox */; };
-		E155888F2ECF4D9800D0BF93 /* downloads.28.sqlitedb in Resources */ = {isa = PBXBuildFile; fileRef = E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */; };
-		E15588902ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */; };
-		E15588912ECF4D9800D0BF93 /* BLDatabaseManager.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */; };
-		E15588922ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E10DE7492EEC141D00EC75FA /* BLDatabaseManager.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BLDatabaseManager.sqlite; sourceTree = "<group>"; };
+		E10DE74A2EEC141D00EC75FA /* BLDatabaseManager.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-shm"; sourceTree = "<group>"; };
+		E10DE74B2EEC141D00EC75FA /* BLDatabaseManager.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-wal"; sourceTree = "<group>"; };
+		E10DE74C2EEC141D00EC75FA /* downloads.28.sqlitedb */ = {isa = PBXFileReference; lastKnownFileType = file; path = downloads.28.sqlitedb; sourceTree = "<group>"; };
 		E14761ED2DF135F000FC89FB /* SparseBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparseBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E14761FB2DF1364F00FC89FB /* afc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = afc.h; sourceTree = "<group>"; };
-		E14761FC2DF1364F00FC89FB /* companion_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = companion_proxy.h; sourceTree = "<group>"; };
-		E14761FD2DF1364F00FC89FB /* debugserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debugserver.h; sourceTree = "<group>"; };
-		E14761FE2DF1364F00FC89FB /* diagnostics_relay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = diagnostics_relay.h; sourceTree = "<group>"; };
-		E14761FF2DF1364F00FC89FB /* file_relay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file_relay.h; sourceTree = "<group>"; };
-		E14762002DF1364F00FC89FB /* heartbeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = heartbeat.h; sourceTree = "<group>"; };
-		E14762012DF1364F00FC89FB /* house_arrest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = house_arrest.h; sourceTree = "<group>"; };
-		E14762022DF1364F00FC89FB /* installation_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = installation_proxy.h; sourceTree = "<group>"; };
-		E14762032DF1364F00FC89FB /* libimobiledevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libimobiledevice.h; sourceTree = "<group>"; };
-		E14762042DF1364F00FC89FB /* lockdown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lockdown.h; sourceTree = "<group>"; };
-		E14762052DF1364F00FC89FB /* misagent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = misagent.h; sourceTree = "<group>"; };
-		E14762062DF1364F00FC89FB /* mobile_image_mounter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobile_image_mounter.h; sourceTree = "<group>"; };
-		E14762072DF1364F00FC89FB /* mobileactivation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobileactivation.h; sourceTree = "<group>"; };
-		E14762082DF1364F00FC89FB /* mobilebackup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobilebackup.h; sourceTree = "<group>"; };
-		E14762092DF1364F00FC89FB /* mobilebackup2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobilebackup2.h; sourceTree = "<group>"; };
-		E147620A2DF1364F00FC89FB /* mobilesync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobilesync.h; sourceTree = "<group>"; };
-		E147620B2DF1364F00FC89FB /* notification_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = notification_proxy.h; sourceTree = "<group>"; };
-		E147620C2DF1364F00FC89FB /* preboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = preboard.h; sourceTree = "<group>"; };
-		E147620D2DF1364F00FC89FB /* property_list_service.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = property_list_service.h; sourceTree = "<group>"; };
-		E147620E2DF1364F00FC89FB /* restore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = restore.h; sourceTree = "<group>"; };
-		E147620F2DF1364F00FC89FB /* reverse_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reverse_proxy.h; sourceTree = "<group>"; };
-		E14762102DF1364F00FC89FB /* sbservices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sbservices.h; sourceTree = "<group>"; };
-		E14762112DF1364F00FC89FB /* screenshotr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screenshotr.h; sourceTree = "<group>"; };
-		E14762122DF1364F00FC89FB /* service.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = service.h; sourceTree = "<group>"; };
-		E14762132DF1364F00FC89FB /* syslog_relay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syslog_relay.h; sourceTree = "<group>"; };
-		E14762142DF1364F00FC89FB /* webinspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = webinspector.h; sourceTree = "<group>"; };
-		E14762162DF1364F00FC89FB /* cbuf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cbuf.h; sourceTree = "<group>"; };
-		E14762172DF1364F00FC89FB /* collection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collection.h; sourceTree = "<group>"; };
-		E14762182DF1364F00FC89FB /* opack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opack.h; sourceTree = "<group>"; };
-		E14762192DF1364F00FC89FB /* socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		E147621A2DF1364F00FC89FB /* termcolors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = termcolors.h; sourceTree = "<group>"; };
-		E147621B2DF1364F00FC89FB /* thread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
-		E147621C2DF1364F00FC89FB /* tlv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tlv.h; sourceTree = "<group>"; };
-		E147621D2DF1364F00FC89FB /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		E147621F2DF1364F00FC89FB /* plist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plist.h; sourceTree = "<group>"; };
-		E14762212DF1364F00FC89FB /* em_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = em_proxy.h; sourceTree = "<group>"; };
-		E14762222DF1364F00FC89FB /* em_proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = em_proxy.swift; sourceTree = "<group>"; };
-		E14762232DF1364F00FC89FB /* endianness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = endianness.h; sourceTree = "<group>"; };
-		E14762242DF1364F00FC89FB /* minimuxer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = minimuxer.h; sourceTree = "<group>"; };
-		E14762252DF1364F00FC89FB /* minimuxer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = minimuxer.swift; sourceTree = "<group>"; };
-		E14762262DF1364F00FC89FB /* minimuxer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "minimuxer-Bridging-Header.h"; sourceTree = "<group>"; };
-		E14762272DF1364F00FC89FB /* minimuxer-helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "minimuxer-helpers.swift"; sourceTree = "<group>"; };
-		E14762282DF1364F00FC89FB /* SwiftBridgeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBridgeCore.h; sourceTree = "<group>"; };
-		E14762292DF1364F00FC89FB /* SwiftBridgeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridgeCore.swift; sourceTree = "<group>"; };
 		E147622F2DF1365A00FC89FB /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = empty.swift; sourceTree = "<group>"; };
 		E14762322DF1368000FC89FB /* eligibility.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = eligibility.plist; sourceTree = "<group>"; };
 		E14762332DF1368000FC89FB /* FeatureFlags_Global.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = FeatureFlags_Global.plist; sourceTree = "<group>"; };
@@ -100,16 +47,13 @@
 		E147626F2DF13CB700FC89FB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		E14762702DF13CB700FC89FB /* libusbmuxd-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libusbmuxd-2.0.a"; sourceTree = "<group>"; };
 		E15588832ECF1BA000D0BF93 /* SparseBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SparseBox-Info.plist"; sourceTree = "<group>"; };
-		E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BLDatabaseManager.sqlite; sourceTree = "<group>"; };
-		E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-shm"; sourceTree = "<group>"; };
-		E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLDatabaseManager.sqlite-wal"; sourceTree = "<group>"; };
-		E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */ = {isa = PBXFileReference; lastKnownFileType = file; path = downloads.28.sqlitedb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		E1D10D492DF17DD700995A8E /* Exceptions for "Sources" folder in "SparseBox" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				MobileDevice/MobileDevice.swift,
 				SparseRestore/README.txt,
 			);
 			target = E14761EC2DF135F000FC89FB /* SparseBox */;
@@ -135,17 +79,9 @@
 				E14762652DF138AB00FC89FB /* NIOFoundationCompat in Frameworks */,
 				E14762672DF138AB00FC89FB /* NIOPosix in Frameworks */,
 				E14762632DF138AB00FC89FB /* NIOCore in Frameworks */,
-				E14762712DF13CB700FC89FB /* libcrypto.a in Frameworks */,
-				E14762722DF13CB700FC89FB /* libem_proxy-ios.a in Frameworks */,
-				E14762732DF13CB700FC89FB /* libimobiledevice-glue-1.0.a in Frameworks */,
-				E14762742DF13CB700FC89FB /* libimobiledevice-1.0.a in Frameworks */,
 				E15588822ECF1AF300D0BF93 /* NIOHTTP1 in Frameworks */,
-				E14762752DF13CB700FC89FB /* libusbmuxd-2.0.a in Frameworks */,
-				E14762762DF13CB700FC89FB /* libminimuxer-ios.a in Frameworks */,
 				E15588802ECF1AF300D0BF93 /* NIO in Frameworks */,
 				E15588882ECF25A000D0BF93 /* FlyingFox in Frameworks */,
-				E14762772DF13CB700FC89FB /* libplist-2.0.a in Frameworks */,
-				E14762782DF13CB700FC89FB /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,77 +114,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E14762152DF1364F00FC89FB /* libimobiledevice */ = {
-			isa = PBXGroup;
-			children = (
-				E14761FB2DF1364F00FC89FB /* afc.h */,
-				E14761FC2DF1364F00FC89FB /* companion_proxy.h */,
-				E14761FD2DF1364F00FC89FB /* debugserver.h */,
-				E14761FE2DF1364F00FC89FB /* diagnostics_relay.h */,
-				E14761FF2DF1364F00FC89FB /* file_relay.h */,
-				E14762002DF1364F00FC89FB /* heartbeat.h */,
-				E14762012DF1364F00FC89FB /* house_arrest.h */,
-				E14762022DF1364F00FC89FB /* installation_proxy.h */,
-				E14762032DF1364F00FC89FB /* libimobiledevice.h */,
-				E14762042DF1364F00FC89FB /* lockdown.h */,
-				E14762052DF1364F00FC89FB /* misagent.h */,
-				E14762062DF1364F00FC89FB /* mobile_image_mounter.h */,
-				E14762072DF1364F00FC89FB /* mobileactivation.h */,
-				E14762082DF1364F00FC89FB /* mobilebackup.h */,
-				E14762092DF1364F00FC89FB /* mobilebackup2.h */,
-				E147620A2DF1364F00FC89FB /* mobilesync.h */,
-				E147620B2DF1364F00FC89FB /* notification_proxy.h */,
-				E147620C2DF1364F00FC89FB /* preboard.h */,
-				E147620D2DF1364F00FC89FB /* property_list_service.h */,
-				E147620E2DF1364F00FC89FB /* restore.h */,
-				E147620F2DF1364F00FC89FB /* reverse_proxy.h */,
-				E14762102DF1364F00FC89FB /* sbservices.h */,
-				E14762112DF1364F00FC89FB /* screenshotr.h */,
-				E14762122DF1364F00FC89FB /* service.h */,
-				E14762132DF1364F00FC89FB /* syslog_relay.h */,
-				E14762142DF1364F00FC89FB /* webinspector.h */,
-			);
-			path = libimobiledevice;
-			sourceTree = "<group>";
-		};
-		E147621E2DF1364F00FC89FB /* libimobiledevice-glue */ = {
-			isa = PBXGroup;
-			children = (
-				E14762162DF1364F00FC89FB /* cbuf.h */,
-				E14762172DF1364F00FC89FB /* collection.h */,
-				E14762182DF1364F00FC89FB /* opack.h */,
-				E14762192DF1364F00FC89FB /* socket.h */,
-				E147621A2DF1364F00FC89FB /* termcolors.h */,
-				E147621B2DF1364F00FC89FB /* thread.h */,
-				E147621C2DF1364F00FC89FB /* tlv.h */,
-				E147621D2DF1364F00FC89FB /* utils.h */,
-			);
-			path = "libimobiledevice-glue";
-			sourceTree = "<group>";
-		};
-		E14762202DF1364F00FC89FB /* plist */ = {
-			isa = PBXGroup;
-			children = (
-				E147621F2DF1364F00FC89FB /* plist.h */,
-			);
-			path = plist;
-			sourceTree = "<group>";
-		};
 		E147622A2DF1364F00FC89FB /* include */ = {
 			isa = PBXGroup;
 			children = (
-				E14762152DF1364F00FC89FB /* libimobiledevice */,
-				E147621E2DF1364F00FC89FB /* libimobiledevice-glue */,
-				E14762202DF1364F00FC89FB /* plist */,
-				E14762212DF1364F00FC89FB /* em_proxy.h */,
-				E14762222DF1364F00FC89FB /* em_proxy.swift */,
-				E14762232DF1364F00FC89FB /* endianness.h */,
-				E14762242DF1364F00FC89FB /* minimuxer.h */,
-				E14762252DF1364F00FC89FB /* minimuxer.swift */,
-				E14762262DF1364F00FC89FB /* minimuxer-Bridging-Header.h */,
-				E14762272DF1364F00FC89FB /* minimuxer-helpers.swift */,
-				E14762282DF1364F00FC89FB /* SwiftBridgeCore.h */,
-				E14762292DF1364F00FC89FB /* SwiftBridgeCore.swift */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -272,12 +140,12 @@
 		E14762352DF1368000FC89FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E10DE7492EEC141D00EC75FA /* BLDatabaseManager.sqlite */,
+				E10DE74A2EEC141D00EC75FA /* BLDatabaseManager.sqlite-shm */,
+				E10DE74B2EEC141D00EC75FA /* BLDatabaseManager.sqlite-wal */,
+				E10DE74C2EEC141D00EC75FA /* downloads.28.sqlitedb */,
 				E14762322DF1368000FC89FB /* eligibility.plist */,
 				E14762332DF1368000FC89FB /* FeatureFlags_Global.plist */,
-				E155888B2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite */,
-				E155888C2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm */,
-				E155888D2ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal */,
-				E155888E2ECF4D9800D0BF93 /* downloads.28.sqlitedb */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -358,11 +226,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E14762372DF1368000FC89FB /* eligibility.plist in Resources */,
-				E155888F2ECF4D9800D0BF93 /* downloads.28.sqlitedb in Resources */,
-				E15588902ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-wal in Resources */,
-				E15588912ECF4D9800D0BF93 /* BLDatabaseManager.sqlite in Resources */,
-				E15588922ECF4D9800D0BF93 /* BLDatabaseManager.sqlite-shm in Resources */,
 				E14762382DF1368000FC89FB /* FeatureFlags_Global.plist in Resources */,
+				E10DE74D2EEC141D00EC75FA /* downloads.28.sqlitedb in Resources */,
+				E10DE74E2EEC141D00EC75FA /* BLDatabaseManager.sqlite-shm in Resources */,
+				E10DE74F2EEC141D00EC75FA /* BLDatabaseManager.sqlite-wal in Resources */,
+				E10DE7502EEC141D00EC75FA /* BLDatabaseManager.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,12 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E14762312DF1365A00FC89FB /* empty.swift in Sources */,
-				E147622B2DF1365000FC89FB /* SwiftBridgeCore.swift in Sources */,
-				E147622C2DF1365000FC89FB /* minimuxer-helpers.swift in Sources */,
-				E147622D2DF1365000FC89FB /* minimuxer.swift in Sources */,
 				E147623A2DF1368E00FC89FB /* FindCacheDataOffset.m in Sources */,
-				E147623D2DF1369700FC89FB /* idevicebackup2.c in Sources */,
-				E147622E2DF1365000FC89FB /* em_proxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +379,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z325T66NZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -535,8 +398,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/Sources/idevice",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.SparseBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -554,7 +418,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z325T66NZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -573,8 +437,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/Sources/idevice",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.SparseBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

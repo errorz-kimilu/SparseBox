@@ -26,6 +26,8 @@ class D28BookChain {
             "Downloads/downloads.28.sqlitedb-wal": d28LocalPath + "-wal"
             
         ]
+        print("TODO")
+        /*
         MobileDevice.requireAppleFileConduitService(udid: udid) { client in
             for (remotePath, localPath) in filesToTransfer {
                 print("Transferring \(localPath) to \(remotePath)...")
@@ -52,5 +54,6 @@ class D28BookChain {
                 afc_file_close(client, handle)
             }
         }
+         */
     }
 }

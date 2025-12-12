@@ -15,8 +15,9 @@ Download ipa from [Releases](https://github.com/khanhduytran0/SparseBox/releases
 Before opening SparseBox, you have to close SideStore from app switcher. This is because only one app can use VPN proxy at a time. Maybe changing port could solve this issue.
 
 ## Thanks to
-- @SideStore: em_proxy and minimuxer
+- @SideStore team: idevice, C bindings from StikDebug
 - @JJTech0130: SparseRestore and backup exploit
+- @hanakim3945: bl_sbx exploit files and writeup
 - @PoomSmart: MobileGestalt dump
 - @Lakr233: BBackupp
 - @libimobiledevice

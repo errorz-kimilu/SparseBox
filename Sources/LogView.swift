@@ -32,11 +32,13 @@ struct LogView: View {
                     logPipe.fileHandleForReading.readabilityHandler = { fileHandle in
                         let data = fileHandle.availableData
                         if !data.isEmpty, var logString = String(data: data, encoding: .utf8) {
-                            if logString.contains(Utils.udid) {
-                                logString = logString.replacingOccurrences(of: Utils.udid, with: "<redacted>")
+                            DispatchQueue.main.async {
+                                if logString.contains(Utils.udid) {
+                                    logString = logString.replacingOccurrences(of: Utils.udid, with: "<redacted>")
+                                }
+                                log.append(logString)
+                                proxy.scrollTo(0)
                             }
-                            log.append(logString)
-                            proxy.scrollTo(0)
                         }
                     }
                 }

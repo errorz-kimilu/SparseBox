@@ -13,34 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Checkout theos/theos
-        uses: actions/checkout@main
-        with:
-          repository: theos/theos
-          ref: master
-          submodules: recursive
-          path: theos
-
-      - name: Checkout theos/sdks
-        uses: actions/checkout@main
-        with:
-          repository: theos/sdks
-          ref: master
-          sparse-checkout: iPhoneOS16.5.sdk
-          path: theos/sdks
-
-      - name: Ensure main utils are installed
-        uses: dhinakg/procursus-action@main
-        with:
-          packages: coreutils make xz ldid
-          
       - name: Build
         run: |
-          export THEOS=theos
-
-          git submodule update --init
-          bash get_libraries.sh
-          gmake package FINALPACKAGE=1 STRIP=0
+          xcodebuild -scheme SparseBox -derivedDataPath build -destination 'generic/platform=iOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          mkdir -p Payload packages
+          cp -R build/Build/Products/Debug-iphoneos/SparseBox.app Payload/
+          zip -r packages/SparseBox.ipa Payload
+          rm -rf Payload
 
       - name: Upload artifact
         uses: actions/upload-artifact@main

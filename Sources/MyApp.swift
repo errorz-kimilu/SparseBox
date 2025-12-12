@@ -1,5 +1,5 @@
 import FlyingFox
-import SQLite
+import SQLite3
 import SwiftUI
 import UniformTypeIdentifiers
 
